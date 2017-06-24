@@ -1,7 +1,7 @@
-package cn.netrelay.mqttmvp.component;
+package cn.netrelay.mqttmvp.dagger.component;
 
 import cn.netrelay.mqttmvp.model.Model;
-import cn.netrelay.mqttmvp.module.MQTTModule;
+import cn.netrelay.mqttmvp.dagger.module.MQTTModule;
 import dagger.Component;
 
 /**

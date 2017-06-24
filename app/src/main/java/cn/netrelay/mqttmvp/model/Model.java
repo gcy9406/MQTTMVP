@@ -2,8 +2,8 @@ package cn.netrelay.mqttmvp.model;
 
 import javax.inject.Inject;
 
-import cn.netrelay.mqttmvp.component.DaggerMQTTComponent;
-import cn.netrelay.mqttmvp.module.MQTTModule;
+import cn.netrelay.mqttmvp.dagger.component.DaggerMQTTComponent;
+import cn.netrelay.mqttmvp.dagger.module.MQTTModule;
 import cn.netrelay.mqttmvp.utils.MQTTHelp;
 import cn.netrelay.mqttmvp.utils.SharedP;
 

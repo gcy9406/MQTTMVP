@@ -1,6 +1,6 @@
-package cn.netrelay.mqttmvp.component;
+package cn.netrelay.mqttmvp.dagger.component;
 
-import cn.netrelay.mqttmvp.module.SPModule;
+import cn.netrelay.mqttmvp.dagger.module.SPModule;
 import cn.netrelay.mqttmvp.utils.SharedP;
 import dagger.Component;
 

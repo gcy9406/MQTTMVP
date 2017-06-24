@@ -1,4 +1,4 @@
-package cn.netrelay.mqttmvp.module;
+package cn.netrelay.mqttmvp.dagger.module;
 
 import cn.netrelay.mqttmvp.present.Presenter;
 import cn.netrelay.mqttmvp.view.IView;
@@ -9,10 +9,10 @@ import dagger.Provides;
  * Created by gcy on 2017/6/23.
  */
 @Module
-public class MyModule {
+public class MainModule {
     private IView view;
 
-    public MyModule(IView view) {
+    public MainModule(IView view) {
         this.view = view;
     }
 

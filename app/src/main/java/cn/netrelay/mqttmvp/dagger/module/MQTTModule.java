@@ -1,4 +1,4 @@
-package cn.netrelay.mqttmvp.module;
+package cn.netrelay.mqttmvp.dagger.module;
 
 import cn.netrelay.mqttmvp.utils.MQTTHelp;
 import dagger.Module;

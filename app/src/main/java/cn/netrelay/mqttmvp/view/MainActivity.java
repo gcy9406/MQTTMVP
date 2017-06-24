@@ -3,6 +3,7 @@ package cn.netrelay.mqttmvp.view;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -31,11 +32,14 @@ import cn.netrelay.mqttmvp.R;
 import cn.netrelay.mqttmvp.adapter.MyAdapter;
 import cn.netrelay.mqttmvp.bean.PostInfo;
 import cn.netrelay.mqttmvp.callback.OnItemClickListener;
-import cn.netrelay.mqttmvp.component.DaggerMyComponent;
-import cn.netrelay.mqttmvp.component.DaggerSPComponent;
-import cn.netrelay.mqttmvp.component.SPComponent;
-import cn.netrelay.mqttmvp.module.MyModule;
-import cn.netrelay.mqttmvp.module.SPModule;
+import cn.netrelay.mqttmvp.dagger.component.DaggerMyAdapterComponent;
+import cn.netrelay.mqttmvp.dagger.component.DaggerMainComponent;
+import cn.netrelay.mqttmvp.dagger.component.DaggerSPComponent;
+import cn.netrelay.mqttmvp.dagger.component.MyAdapterComponent;
+import cn.netrelay.mqttmvp.dagger.component.SPComponent;
+import cn.netrelay.mqttmvp.dagger.module.MainModule;
+import cn.netrelay.mqttmvp.dagger.module.MyAdapterModule;
+import cn.netrelay.mqttmvp.dagger.module.SPModule;
 import cn.netrelay.mqttmvp.present.Presenter;
 import cn.netrelay.mqttmvp.utils.SharedP;
 
@@ -74,7 +78,9 @@ public class MainActivity extends AppCompatActivity implements IView, OnItemClic
     @Inject
     SharedP sharedP;
 
+    @Inject
     MyAdapter myAdapter;
+
     private List<PostInfo> data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,18 +92,21 @@ public class MainActivity extends AppCompatActivity implements IView, OnItemClic
         SPComponent spComponent = DaggerSPComponent.builder()
                 .sPModule(new SPModule(this))
                 .build();
+        MyAdapterComponent myAdapterComponent = DaggerMyAdapterComponent.builder()
+                .myAdapterModule(new MyAdapterModule(this))
+                .build();
 
-        DaggerMyComponent.builder()
+        DaggerMainComponent.builder()
+                .myAdapterComponent(myAdapterComponent)
                 .sPComponent(spComponent)
-                .myModule(new MyModule(this))
+                .mainModule(new MainModule(this))
                 .build()
                 .inject(this);
-
-        myAdapter = new MyAdapter(this);
 
         presenter.getShared(sharedP);
         mqttSubList.setLayoutManager(new LinearLayoutManager(this));
         mqttSubList.setAdapter(myAdapter);
+        mqttSubList.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
         myAdapter.setOnItemClickListener(this);
 
         EventBus.getDefault().register(this);
